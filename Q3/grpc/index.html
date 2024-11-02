@@ -1,0 +1,60 @@
+## Just a placeholder for upcoming intergation 
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pet Adoption</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #pets-list { margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Pet Adoption System</h1>
+    <h2>Register a New Pet</h2>
+    <form id="register-form">
+        <input type="text" id="name" placeholder="Name" required>
+        <input type="text" id="type" placeholder="Type" required>
+        <input type="number" id="age" placeholder="Age" required>
+        <button type="submit">Register</button>
+    </form>
+
+    <h2>Fetch List of Pets</h2>
+    <button id="fetch-pets">Fetch Pets</button>
+    <div id="pets-list"></div>
+
+    <script>
+        document.getElementById('register-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const name = document.getElementById('name').value;
+            const type = document.getElementById('type').value;
+            const age = document.getElementById('age').value;
+
+            const response = await fetch('/api/register', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, type, age }),
+            });
+            const message = await response.text();
+            alert(message);
+        });
+
+        document.getElementById('fetch-pets').addEventListener('click', async () => {
+            const response = await fetch('/api/pets');
+            const pets = await response.json();
+            const petsListDiv = document.getElementById('pets-list');
+            petsListDiv.innerHTML = ''; // Clear previous list
+            if (pets.length === 0) {
+                petsListDiv.innerHTML = 'No pets available.';
+                return;
+            }
+            pets.forEach(pet => {
+                petsListDiv.innerHTML += `<div>Pet ID: ${pet.id}, Name: ${pet.name}, Type: ${pet.type}, Age: ${pet.age}</div>`;
+            });
+        });
+    </script>
+</body>
+</html>

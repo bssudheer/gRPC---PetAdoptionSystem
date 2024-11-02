@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package petAdoption;
+
+service PetAdoption {
+  rpc GetPets(Empty) returns (PetsResponse);
+  rpc AdoptPet(PetIdRequest) returns (AdoptionResponse);
+  rpc RegisterPet(Pet) returns (AdoptionResponse);
+  rpc SearchPets(PetSearchRequest) returns (PetsResponse);
+}
+
+message Empty {}
+
+message Pet {
+  int32 id = 1;
+  string name = 2;
+  string gender = 3; // New field for gender
+  int32 age = 4;
+  string breed = 5; // New field for breed
+  string location = 6; // New field for location
+}
+
+message PetsResponse {
+  repeated Pet pets = 1;
+}
+
+message PetIdRequest {
+  int32 petId = 1;
+}
+
+message AdoptionResponse {
+  string message = 1;
+}
+
+message PetSearchRequest {
+  string name = 1;
+  string type = 2;
+  int32 age = 3;
+}

@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package calculator;
+
+// Define the service
+service Calculator {
+    // RPC for adding two numbers
+    rpc Add (OperationRequest) returns (OperationResponse);
+    
+    // RPC for multiplying two numbers
+    rpc Multiply (OperationRequest) returns (OperationResponse);
+}
+
+// Request message with two numbers
+message OperationRequest {
+    double num1 = 1;
+    double num2 = 2;
+}
+
+// Response message with the result
+message OperationResponse {
+    double result = 1;
+}
