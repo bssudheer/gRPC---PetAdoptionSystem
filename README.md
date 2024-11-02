@@ -1,7 +1,7 @@
 ## CSE-5306-004-DISTRIBUTED SYSTEMS
 ## Project Assignment 2: gRPC-Backed Virtual Pet Adoption System
 
-## Group 20: Srinivas Sudheer Reddy Buchipalli – 1002149811 & Ali Ashan
+Srinivas Sudheer Reddy Buchipalli
 
 
 ## Q1 Part 1:
